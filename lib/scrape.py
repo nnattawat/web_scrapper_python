@@ -16,9 +16,8 @@ def _filterLinksByVote(news, threshold):
         'score': score
     } for link, score in news if score > threshold]
 
-    popularNews.sort(key=lambda new: new.get('score'), reverse=True)
+    return sorted(popularNews, key=lambda new: new.get('score'), reverse=True)
 
-    return popularNews
 
 def _mapSubTextToPoints(subtexts):
     def getPoints(subtext):
