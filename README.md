@@ -5,7 +5,9 @@ pipenv install
 ```
 
 ## Run test
-TBD
+```bash
+pipenv run python -m unittest discover -p '*_test.py'
+```
 
 ## Run script
 ```bash
