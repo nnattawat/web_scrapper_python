@@ -4,12 +4,12 @@ from bs4 import BeautifulSoup
 URL = 'https://news.ycombinator.com/news'
 
 
-def _getNews(url):
+def _get_news(url):
     res = requests.get(url)
     return BeautifulSoup(res.text, 'html.parser')
 
 
-def _filterLinksByVote(news, threshold):
+def _filter_links_by_vote(news, threshold):
     popularNews = [{
         'title': link.getText(),
         'url': link.get('href', None),
@@ -19,22 +19,21 @@ def _filterLinksByVote(news, threshold):
     return sorted(popularNews, key=lambda new: new.get('score'), reverse=True)
 
 
-def _mapSubTextToPoints(subtexts):
-    def getPoints(subtext):
+def _map_sub_text_to_points(subtexts):
+    def get_points(subtext):
         scores = subtext.select('.score')
         return int(scores[0].getText().replace(' points', '')) if len(scores) else 0
 
-    return map(getPoints, subtexts)
+    return map(get_points, subtexts)
 
-def getPopularNews(threshold):
-    soup = _getNews(URL)
-
+def get_popular_news(threshold):
+    soup = _get_news(URL)
     links = soup.select('.storylink')
     subtexts = soup.select('.subtext')
-    points = _mapSubTextToPoints(subtexts)
+    points = _map_sub_text_to_points(subtexts)
 
-    return _filterLinksByVote(zip(links, points), threshold)
+    return _filter_links_by_vote(zip(links, points), threshold)
 
 
 if __name__ == '__main__':
-    print(getPopularNews(100))
+    print(get_popular_news(100))
