@@ -10,13 +10,13 @@ def _get_news(url):
 
 
 def _filter_links_by_vote(news, threshold):
-    popularNews = [{
+    popular_news = [{
         'title': link.getText(),
         'url': link.get('href', None),
         'score': score
     } for link, score in news if score > threshold]
 
-    return sorted(popularNews, key=lambda new: new.get('score'), reverse=True)
+    return sorted(popular_news, key=lambda new: new.get('score'), reverse=True)
 
 
 def _map_sub_text_to_points(subtexts):
