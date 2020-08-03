@@ -11,5 +11,5 @@ pipenv run python -m unittest discover -p '*_test.py'
 
 ## Run script
 ```bash
-pipenv run main.py | jq
+pipenv run python main.py | jq
 ```

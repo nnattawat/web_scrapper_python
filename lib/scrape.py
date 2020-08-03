@@ -26,6 +26,7 @@ def _map_sub_text_to_points(subtexts):
 
     return map(get_points, subtexts)
 
+
 def get_popular_news(threshold):
     soup = _get_news(URL)
     links = soup.select('.storylink')
